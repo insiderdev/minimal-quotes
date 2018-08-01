@@ -1,32 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import { Provider } from 'react-redux';
+import React from 'react';
+import { View, ActivityIndicator, AppRegistry, StyleSheet } from 'react-native';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import { store, persistor } from './src/redux/store';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import Navigator from './src/modules/navigation/Navigator';
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
+export default function App() {
+  return (
+    <Provider store={store}>
+      <PersistGate
+        loading={(
+          <View style={styles.container}>
+            <ActivityIndicator />
+          </View>
+        )}
+        persistor={persistor}
+      >
+        <Navigator />
+      </PersistGate>
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -34,16 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    backgroundColor: 'white',
   },
 });
