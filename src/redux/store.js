@@ -25,7 +25,7 @@ const enhancer = composeEnhancers(...enhancers);
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: [''],
+  blacklist: ['quotes'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

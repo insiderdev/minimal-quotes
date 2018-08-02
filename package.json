@@ -7,9 +7,10 @@
     "test": "jest",
     "run:ios": "react-native run-ios",
     "run:android": "react-native run-android",
-    "lint": "./node_modules/eslint/bin/eslint.js src"
+    "lint": "./node_modules/eslint/bin/eslint.js src --fix"
   },
   "dependencies": {
+    "lodash": "^4.17.10",
     "react": "16.4.1",
     "react-native": "0.56.0",
     "react-native-extended-stylesheet": "^0.8.1",

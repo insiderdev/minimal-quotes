@@ -2,17 +2,24 @@ import React from 'react';
 import {
   View,
   Text,
+  TouchableWithoutFeedback,
 } from 'react-native';
 
 import styles from './styles';
 
-export default function QuotesView({ quotes }) {
+export default function QuotesView({ currentQuote, newQuote }) {
   return (
-    <View style={styles.container}>
-      <View style={styles.quoteContainer}>
-        <Text style={styles.quoteText}>creativity is just connecting things</Text>
-        <Text style={styles.quoteAuthor}>steve jobs</Text>
+    <TouchableWithoutFeedback
+      onPress={newQuote}
+    >
+      <View style={styles.container}>
+        { currentQuote && (
+          <View style={styles.quoteContainer}>
+            <Text style={styles.quoteText}>{currentQuote && currentQuote.quote}</Text>
+            <Text style={styles.quoteAuthor}>{currentQuote && currentQuote.author}</Text>
+          </View>
+        )}
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 }
