@@ -1,5 +1,9 @@
 import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose';
+import { StatusBar } from 'react-native';
+import {
+  compose,
+  lifecycle,
+} from 'recompose';
 
 import QuotesView from './QuotesView';
 import {
@@ -13,6 +17,7 @@ export default compose(
       quotes: state.quotes.quotesList,
       quotesLoaded: state.quotes.quotesLoaded,
       currentQuote: state.quotes.currentQuote,
+      isDarkBg: state.quotes.isDarkBg,
     }),
     dispatch => ({
       loadQuotes: () => dispatch(loadQuotes()),
@@ -21,6 +26,7 @@ export default compose(
   ),
   lifecycle({
     componentDidMount() {
+      StatusBar.setHidden(true);
       if (!this.props.quotesLoaded) {
         this.props.loadQuotes();
       }

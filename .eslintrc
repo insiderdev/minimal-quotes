@@ -24,6 +24,7 @@
     "react/prop-types": "off",
     "no-return-assign": "off",
     "operator-linebreak": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "react/destructuring-assignment": "off"
   }
 }

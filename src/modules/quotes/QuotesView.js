@@ -1,25 +1,52 @@
 import React from 'react';
 import {
   View,
-  Text,
   TouchableWithoutFeedback,
 } from 'react-native';
 
+import {
+  AnimatedTextSwitch,
+  AnimatedBackgroundSwitch,
+} from '../../components';
+
 import styles from './styles';
 
-export default function QuotesView({ currentQuote, newQuote }) {
+export default function QuotesView({
+  currentQuote,
+  newQuote,
+  isDarkBg,
+}) {
   return (
     <TouchableWithoutFeedback
       onPress={newQuote}
     >
-      <View style={styles.container}>
+      <AnimatedBackgroundSwitch
+        isDark={isDarkBg}
+        style={{
+          ...styles.container,
+        }}
+      >
         { currentQuote && (
           <View style={styles.quoteContainer}>
-            <Text style={styles.quoteText}>{currentQuote && currentQuote.quote}</Text>
-            <Text style={styles.quoteAuthor}>{currentQuote && currentQuote.author}</Text>
+            <AnimatedTextSwitch
+              style={{
+                ...styles.quoteText,
+                ...isDarkBg ? styles.quoteTextLight : {},
+              }}
+            >
+              {currentQuote && currentQuote.quote}
+            </AnimatedTextSwitch>
+            <AnimatedTextSwitch
+              style={{
+                ...styles.quoteAuthor,
+                ...isDarkBg ? styles.quoteAuthorLight : {},
+              }}
+            >
+              {currentQuote && currentQuote.author}
+            </AnimatedTextSwitch>
           </View>
         )}
-      </View>
+      </AnimatedBackgroundSwitch>
     </TouchableWithoutFeedback>
   );
 }

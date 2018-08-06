@@ -7,22 +7,26 @@ const initialState = {
   quotesList: [],
   quotesLoaded: false,
   currentQuote: null,
+  isDarkBg: false,
 };
 
-const LOAD_QUOTES = 'QuotesState/LOAD_QUOTES';
-const NEXT_QUOTE = 'QuotesState/NEXT_QUOTE';
+export const LOAD_QUOTES = 'QuotesState/LOAD_QUOTES';
+export const NEXT_QUOTE = 'QuotesState/NEXT_QUOTE';
 
-// Load quotes from the json database into Redux store
+/**
+ * Initial quotes loading into the redux store
+ * @returns {Function} Dispatches LOAD_QUOTES action with new quotes
+ */
 export function loadQuotes() {
   return (dispatch) => {
+    // Modifying quotes array to add index and displayedTimes
     const modifiedQuotes = quotesData
       .quotes
       .map((quote, index) => ({
         ...quote,
         displayedTimes: 0,
         id: index,
-      }),
-      );
+      }));
 
     dispatch({
       type: LOAD_QUOTES,
@@ -31,6 +35,13 @@ export function loadQuotes() {
   };
 }
 
+/**
+ * Choosing the next quote for displaying.
+ * An algorithm for picking the next quote:
+ *   - choose all quotes with minimum displayedTimes value
+ *   - pick a random quote from this set
+ * @returns {Function} Dispatches NEXT_QUOTE action with the new quote
+ */
 export function newQuote() {
   return (dispatch, getState) => {
     const allQuotes = getState().quotes.quotesList;
@@ -41,6 +52,7 @@ export function newQuote() {
       quote => quote.displayedTimes === allQuotes[0].displayedTimes,
     );
 
+    // Step 2: Choose a random quote
     const randomQuote = notPopularQuotes[_.random(0, notPopularQuotes.length - 1)];
     randomQuote.displayedTimes += 1;
 
@@ -62,8 +74,11 @@ export default function QuotesReducer(state = initialState, action) {
         quotesLoaded: true,
       };
     case NEXT_QUOTE:
+      // Get an array of quotes without the new quote
       const quotesWithoutNew = _.filter(state.quotesList, q => q.id !== action.payload.nextQuote.id);
+      // Get an index of a new quote in the sorted array by displayedTimes
       const index = _.sortedIndexBy(quotesWithoutNew, action.payload.nextQuote, 'displayedTimes');
+      // Insert a new quote into sorted array
       quotesWithoutNew.splice(index, 0, action.payload.nextQuote);
 
       return {
@@ -72,6 +87,7 @@ export default function QuotesReducer(state = initialState, action) {
         quotesList: {
           ...quotesWithoutNew,
         },
+        isDarkBg: !!_.random(0, 1),
       };
     default:
       return state;
