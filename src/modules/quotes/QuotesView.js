@@ -3,7 +3,6 @@ import {
   View,
   TouchableWithoutFeedback,
   Animated,
-  TouchableOpacity,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 
@@ -27,8 +26,6 @@ export default function QuotesView({
       style={styles.container}
     />
   );
-
-  console.log(currentQuote);
 
   return (
     <SideMenu
@@ -79,7 +76,7 @@ export default function QuotesView({
             </AnimatedTextSwitch>
 
             <View style={styles.footerIcons}>
-              <TouchableOpacity onPress={() => toggleBookmark(currentQuote)}>
+              <TouchableWithoutFeedback onPress={() => toggleBookmark(currentQuote)}>
                 <View>
                   <AnimatedIconSwitch
                     source={currentQuote && currentQuote.bookmarked ?
@@ -92,7 +89,7 @@ export default function QuotesView({
                     }}
                   />
                 </View>
-              </TouchableOpacity>
+              </TouchableWithoutFeedback>
 
               <AnimatedIconSwitch
                 source={require('../../../assets/icons/share.png')}

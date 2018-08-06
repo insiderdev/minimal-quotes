@@ -12,21 +12,26 @@ class AnimatedIconSwitch extends React.Component {
     this.state = {
       iconOpacity: new Animated.Value(1),
       tintColor: props.style.tintColor,
+      source: props.source,
     };
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.style.tintColor !== this.state.tintColor) {
+    if (
+      newProps.style.tintColor !== this.state.tintColor ||
+      this.state.source !== newProps.source
+    ) {
       Animated.timing(
         this.state.iconOpacity,
         {
           toValue: 0,
-          duration: config.defaultAnimationDuration,
+          duration: config.defaultAnimationDuration / 3,
           easing: Easing.in(Easing.sin),
         },
       ).start(() => {
         this.setState({
           tintColor: newProps.style.tintColor,
+          source: newProps.source,
         }, () => {
           Animated.timing(
             this.state.iconOpacity,
@@ -46,6 +51,7 @@ class AnimatedIconSwitch extends React.Component {
       <Animated.Image
         resizeMode="contain"
         {...this.props}
+        source={this.state.source}
         style={{
           ...this.props.style,
           opacity: this.state.iconOpacity,
