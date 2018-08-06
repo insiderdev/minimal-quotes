@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux';
 import React from 'react';
-import { View, ActivityIndicator, AppRegistry, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { store, persistor } from './src/redux/store';
