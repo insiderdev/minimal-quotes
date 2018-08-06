@@ -9,6 +9,7 @@ import QuotesView from './QuotesView';
 import {
   loadQuotes,
   newQuote,
+  toggleBookmark,
 } from './QuotesState';
 
 export default compose(
@@ -22,6 +23,7 @@ export default compose(
     dispatch => ({
       loadQuotes: () => dispatch(loadQuotes()),
       newQuote: () => dispatch(newQuote()),
+      toggleBookmark: quote => dispatch(toggleBookmark(quote)),
     }),
   ),
   lifecycle({

@@ -1,4 +1,4 @@
-/* eslint-disable no-case-declarations */
+/* eslint-disable no-case-declarations,no-confusing-arrow */
 import _ from 'lodash';
 
 const quotesData = require('./data');
@@ -8,10 +8,21 @@ const initialState = {
   quotesLoaded: false,
   currentQuote: null,
   isDarkBg: false,
+  categories: [
+    { id: 0, name: 'inspire', selected: true },
+    { id: 1, name: 'management', selected: true },
+    { id: 2, name: 'sports', selected: true },
+    { id: 3, name: 'life', selected: true },
+    { id: 4, name: 'funny', selected: true },
+    { id: 5, name: 'love', selected: true },
+    { id: 6, name: 'art', selected: true },
+    { id: 7, name: 'students', selected: true },
+  ],
 };
 
 export const LOAD_QUOTES = 'QuotesState/LOAD_QUOTES';
 export const NEXT_QUOTE = 'QuotesState/NEXT_QUOTE';
+export const TOGGLE_BOOKMARK = 'QuotesState/TOGGLE_BOOKMARK';
 
 /**
  * Initial quotes loading into the redux store
@@ -25,6 +36,7 @@ export function loadQuotes() {
       .map((quote, index) => ({
         ...quote,
         displayedTimes: 0,
+        bookmarked: false,
         id: index,
       }));
 
@@ -65,6 +77,13 @@ export function newQuote() {
   };
 }
 
+export function toggleBookmark(quote) {
+  return {
+    type: TOGGLE_BOOKMARK,
+    quote,
+  };
+}
+
 export default function QuotesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_QUOTES:
@@ -84,10 +103,24 @@ export default function QuotesReducer(state = initialState, action) {
       return {
         ...state,
         currentQuote: action.payload.nextQuote,
-        quotesList: {
+        quotesList: [
           ...quotesWithoutNew,
-        },
+        ],
         isDarkBg: !!_.random(0, 1),
+      };
+    case TOGGLE_BOOKMARK:
+      return {
+        ...state,
+        quotesList: state.quotesList.map(q => q.id === action.quote.id ?
+          {
+            ...q,
+            bookmarked: !action.quote.bookmarked,
+          } : q,
+        ),
+        currentQuote: {
+          ...state.currentQuote,
+          bookmarked: !state.currentQuote.bookmarked,
+        },
       };
     default:
       return state;

@@ -1,9 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-const colors = {
-  light: '#FFFFFF',
-  dark: '#000000',
-};
+import { colors } from '../../config';
 
 export default EStyleSheet.create({
   container: {
@@ -36,5 +33,31 @@ export default EStyleSheet.create({
   },
   quoteAuthorLight: {
     color: colors.light,
+  },
+
+  footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  footerHelpText: {
+    flex: 1,
+    fontFamily: 'System',
+    color: 'gray',
+    fontSize: '1.2rem',
+    fontWeight: '100',
+  },
+  footerIcons: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  footerIcon: {
+    height: '1.5rem',
+    width: '1.5rem',
+    marginHorizontal: '0.5rem',
+    tintColor: colors.dark,
+  },
+  footerIconLight: {
+    tintColor: colors.light,
   },
 });
