@@ -3,11 +3,18 @@ import _ from 'lodash';
 
 const quotesData = require('./data');
 
+export const BG_TYPES = {
+  BG_WHITE: 'BG_WHITE',
+  BG_BLACK: 'BG_BLACK',
+  BG_RANDOM: 'BG_RANDOM',
+};
+
 const initialState = {
   quotesList: [],
   quotesLoaded: false,
   currentQuote: null,
   isDarkBg: false,
+  bgType: BG_TYPES.BG_RANDOM,
   categories: [
     { id: 0, name: 'inspire', selected: true },
     { id: 1, name: 'management', selected: true },
@@ -23,6 +30,7 @@ const initialState = {
 export const LOAD_QUOTES = 'QuotesState/LOAD_QUOTES';
 export const NEXT_QUOTE = 'QuotesState/NEXT_QUOTE';
 export const TOGGLE_BOOKMARK = 'QuotesState/TOGGLE_BOOKMARK';
+export const CHANGE_BG_TYPE = 'QuotesState/CHANGE_BG_TYPE';
 
 /**
  * Initial quotes loading into the redux store
@@ -77,6 +85,13 @@ export function newQuote() {
   };
 }
 
+export function changeBgType(newBgType) {
+  return {
+    type: CHANGE_BG_TYPE,
+    payload: newBgType,
+  };
+}
+
 export function toggleBookmark(quote) {
   return {
     type: TOGGLE_BOOKMARK,
@@ -106,7 +121,7 @@ export default function QuotesReducer(state = initialState, action) {
         quotesList: [
           ...quotesWithoutNew,
         ],
-        isDarkBg: !!_.random(0, 1),
+        isDarkBg: state.bgType === BG_TYPES.BG_RANDOM ? !!_.random(0, 1) : state.isDarkBg,
       };
     case TOGGLE_BOOKMARK:
       return {
@@ -121,6 +136,14 @@ export default function QuotesReducer(state = initialState, action) {
           ...state.currentQuote,
           bookmarked: !state.currentQuote.bookmarked,
         },
+      };
+    case CHANGE_BG_TYPE:
+      return {
+        ...state,
+        bgType: action.payload,
+        // eslint-disable-next-line no-nested-ternary
+        isDarkBg: action.payload === BG_TYPES.BG_WHITE ? false :
+          (action.payload === BG_TYPES.BG_RANDOM ? state.isDarkBg : true),
       };
     default:
       return state;

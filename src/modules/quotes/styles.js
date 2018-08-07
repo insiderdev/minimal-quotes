@@ -17,22 +17,23 @@ export default EStyleSheet.create({
   },
   quoteText: {
     fontFamily: 'System',
-    fontSize: '2.5rem',
+    fontSize: '1.5rem',
     fontWeight: '200',
     color: colors.dark,
+    lineHeight: '2.2rem',
   },
   quoteTextLight: {
     color: colors.light,
   },
   quoteAuthor: {
     fontFamily: 'System',
-    color: 'gray',
-    fontSize: '1.5rem',
+    color: colors.gray,
+    fontSize: '1rem',
     fontWeight: '100',
-    marginTop: '0.5rem',
+    marginTop: '1.2rem',
   },
   quoteAuthorLight: {
-    color: colors.light,
+    color: colors.gray,
   },
   header: {
     flexDirection: 'row',

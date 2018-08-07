@@ -22,7 +22,9 @@ class AnimatedTextSwitch extends React.Component {
 
   componentWillReceiveProps(newProps) {
     const newText = newProps.children;
-    if (newText !== this.state.previousText) {
+    if (newText !== this.state.previousText ||
+        this.state.textColor !== newProps.style.color
+    ) {
       Animated.timing(
         this.state.textOpacity,
         {

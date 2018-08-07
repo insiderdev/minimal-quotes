@@ -4,8 +4,11 @@ import {
   TouchableWithoutFeedback,
   Animated,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
+
+import Sidebar from '../sidebar/SidebarViewContainer';
 
 import {
   AnimatedTextSwitch,
@@ -26,15 +29,9 @@ export default function QuotesView({
   isMenuOpened,
   setIsMenuOpened,
 }) {
-  const Sidebar = () => (
-    <AnimatedBackgroundSwitch
-      isDark={isDarkBg}
-      style={styles.container}
-    />
-  );
-
   return (
     <SideMenu
+      openMenuOffset={Dimensions.get('window').width / 5 * 4}
       isOpen={isMenuOpened}
       onChange={setIsMenuOpened}
       menuPosition="right"
