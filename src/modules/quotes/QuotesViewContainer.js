@@ -51,7 +51,6 @@ export default compose(
 
               await Share.open({
                 url: uri,
-                type: 'jpg',
               });
             } catch (error) {
               Alert.alert('Something went wrong', 'We are so sorry, but something unexpected happened :(');

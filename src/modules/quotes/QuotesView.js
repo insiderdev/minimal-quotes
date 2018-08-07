@@ -52,16 +52,16 @@ export default function QuotesView({
             ...styles.container,
           }}
         >
-          { !isSharing && (
-            <View style={styles.header}>
-              <AnimatedIconSwitch
-                source={require('../../../assets/icons/quote.png')}
-                style={{
-                  ...styles.headerIcon,
-                  ...isDarkBg ? styles.footerIconLight : {},
-                }}
-              />
+          <View style={styles.header}>
+            <AnimatedIconSwitch
+              source={require('../../../assets/icons/quote.png')}
+              style={{
+                ...styles.headerIcon,
+                ...isDarkBg ? styles.footerIconLight : {},
+              }}
+            />
 
+            { !isSharing && (
               <TouchableOpacity
                 onPress={() => setIsMenuOpened(true)}
               >
@@ -76,8 +76,8 @@ export default function QuotesView({
                   />
                 </View>
               </TouchableOpacity>
-            </View>
-          )}
+            )}
+          </View>
 
           { currentQuote && (
             <View style={styles.quoteContainer}>
