@@ -34,6 +34,20 @@ export default EStyleSheet.create({
   quoteAuthorLight: {
     color: colors.light,
   },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  headerIcon: {
+    width: '1rem',
+    tintColor: colors.dark,
+  },
+  headerIconMenu: {
+    width: '1.3rem',
+  },
+  headerIconLight: {
+    tintColor: colors.light,
+  },
 
   footer: {
     flexDirection: 'row',
@@ -52,8 +66,8 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   footerIcon: {
-    height: '1rem',
-    width: '1rem',
+    height: '1.2rem',
+    width: '1.2rem',
     marginHorizontal: '0.5rem',
     tintColor: colors.dark,
   },

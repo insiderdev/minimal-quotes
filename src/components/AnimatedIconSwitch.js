@@ -20,15 +20,15 @@ class AnimatedIconSwitch extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    if (
-      newProps.style.tintColor !== this.state.tintColor ||
-      this.state.source !== newProps.source
-    ) {
+    const isTintColorChanging = newProps.style.tintColor !== this.state.tintColor;
+    const isSourceChanging = this.state.source !== newProps.source;
+
+    if (isTintColorChanging || isSourceChanging) {
       Animated.timing(
         this.state.iconOpacity,
         {
           toValue: 0,
-          duration: config.defaultAnimationDuration / 3,
+          duration: config.defaultAnimationDuration / (isTintColorChanging ? 1 : 3),
           easing: Easing.in(Easing.sin),
         },
       ).start(() => {

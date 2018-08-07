@@ -31,6 +31,7 @@ export default compose(
     }),
   ),
   withState('isSharing', 'setIsSharing', false),
+  withState('isMenuOpened', 'setIsMenuOpened', false),
   withHandlers(() => {
     let _containerRef = null;
     return {

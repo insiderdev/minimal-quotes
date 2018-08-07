@@ -3,6 +3,7 @@ import {
   View,
   TouchableWithoutFeedback,
   Animated,
+  TouchableOpacity,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 
@@ -22,6 +23,8 @@ export default function QuotesView({
   updateContainerRef,
   shareQuote,
   isSharing,
+  isMenuOpened,
+  setIsMenuOpened,
 }) {
   const Sidebar = () => (
     <AnimatedBackgroundSwitch
@@ -32,6 +35,9 @@ export default function QuotesView({
 
   return (
     <SideMenu
+      isOpen={isMenuOpened}
+      onChange={setIsMenuOpened}
+      menuPosition="right"
       menu={<Sidebar />}
       bounceBackOnOverdraw={false}
       animationFunction={(prop, value) => Animated.timing(prop, {
@@ -49,6 +55,33 @@ export default function QuotesView({
             ...styles.container,
           }}
         >
+          { !isSharing && (
+            <View style={styles.header}>
+              <AnimatedIconSwitch
+                source={require('../../../assets/icons/quote.png')}
+                style={{
+                  ...styles.headerIcon,
+                  ...isDarkBg ? styles.footerIconLight : {},
+                }}
+              />
+
+              <TouchableOpacity
+                onPress={() => setIsMenuOpened(true)}
+              >
+                <View>
+                  <AnimatedIconSwitch
+                    source={require('../../../assets/icons/menu.png')}
+                    style={{
+                      ...styles.headerIcon,
+                      ...styles.headerIconMenu,
+                      ...isDarkBg ? styles.footerIconLight : {},
+                    }}
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+
           { currentQuote && (
             <View style={styles.quoteContainer}>
               <AnimatedTextSwitch
