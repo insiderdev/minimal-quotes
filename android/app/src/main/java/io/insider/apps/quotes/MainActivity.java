@@ -1,4 +1,4 @@
-package com.inradium.quotes;
+package io.insider.apps.quotes;
 
 import com.facebook.react.ReactActivity;
 
