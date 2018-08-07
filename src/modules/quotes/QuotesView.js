@@ -19,6 +19,9 @@ export default function QuotesView({
   newQuote,
   isDarkBg,
   toggleBookmark,
+  updateContainerRef,
+  shareQuote,
+  isSharing,
 }) {
   const Sidebar = () => (
     <AnimatedBackgroundSwitch
@@ -40,6 +43,7 @@ export default function QuotesView({
         onPress={newQuote}
       >
         <AnimatedBackgroundSwitch
+          ref={ref => updateContainerRef(ref)}
           isDark={isDarkBg}
           style={{
             ...styles.container,
@@ -66,40 +70,44 @@ export default function QuotesView({
             </View>
           )}
 
-          <View style={styles.footer}>
-            <AnimatedTextSwitch
-              style={{
-                ...styles.footerHelpText,
-              }}
-            >
-              tap for more
-            </AnimatedTextSwitch>
+          { !isSharing && (
+            <View style={styles.footer}>
+              <AnimatedTextSwitch
+                style={{
+                  ...styles.footerHelpText,
+                }}
+              >
+                tap for more
+              </AnimatedTextSwitch>
 
-            <View style={styles.footerIcons}>
-              <TouchableWithoutFeedback onPress={() => toggleBookmark(currentQuote)}>
-                <View>
+              <View style={styles.footerIcons}>
+                <TouchableWithoutFeedback onPress={() => toggleBookmark(currentQuote)}>
+                  <View>
+                    <AnimatedIconSwitch
+                      source={currentQuote && currentQuote.bookmarked ?
+                        require('../../../assets/icons/bookmark-filled.png') :
+                        require('../../../assets/icons/bookmark.png')
+                      }
+                      style={{
+                        ...styles.footerIcon,
+                        ...isDarkBg ? styles.footerIconLight : {},
+                      }}
+                    />
+                  </View>
+                </TouchableWithoutFeedback>
+
+                <TouchableWithoutFeedback onPress={() => shareQuote()}>
                   <AnimatedIconSwitch
-                    source={currentQuote && currentQuote.bookmarked ?
-                      require('../../../assets/icons/bookmark-filled.png') :
-                      require('../../../assets/icons/bookmark.png')
-                    }
+                    source={require('../../../assets/icons/share.png')}
                     style={{
                       ...styles.footerIcon,
                       ...isDarkBg ? styles.footerIconLight : {},
                     }}
                   />
-                </View>
-              </TouchableWithoutFeedback>
-
-              <AnimatedIconSwitch
-                source={require('../../../assets/icons/share.png')}
-                style={{
-                  ...styles.footerIcon,
-                  ...isDarkBg ? styles.footerIconLight : {},
-                }}
-              />
+                </TouchableWithoutFeedback>
+              </View>
             </View>
-          </View>
+          )}
         </AnimatedBackgroundSwitch>
       </TouchableWithoutFeedback>
     </SideMenu>

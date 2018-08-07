@@ -1,8 +1,12 @@
 import { connect } from 'react-redux';
-import { StatusBar } from 'react-native';
+import { StatusBar, Alert } from 'react-native';
+import { captureRef } from 'react-native-view-shot';
+import Share from 'react-native-share';
 import {
   compose,
   lifecycle,
+  withHandlers,
+  withState,
 } from 'recompose';
 
 import QuotesView from './QuotesView';
@@ -26,6 +30,38 @@ export default compose(
       toggleBookmark: quote => dispatch(toggleBookmark(quote)),
     }),
   ),
+  withState('isSharing', 'setIsSharing', false),
+  withHandlers(() => {
+    let _containerRef = null;
+    return {
+      updateContainerRef: () => (ref) => {
+        _containerRef = ref;
+      },
+      shareQuote: props => async () => {
+        props.setIsSharing(true);
+
+        setTimeout(async () => {
+          if (_containerRef) {
+            try {
+              const uri = await captureRef(_containerRef, {
+                format: 'jpg',
+                quality: 1,
+              });
+
+              await Share.open({
+                url: uri,
+                type: 'jpg',
+              });
+            } catch (error) {
+              Alert.alert('Something went wrong', 'We are so sorry, but something unexpected happened :(');
+            } finally {
+              props.setIsSharing(false);
+            }
+          }
+        });
+      },
+    };
+  }),
   lifecycle({
     componentDidMount() {
       StatusBar.setHidden(true);
