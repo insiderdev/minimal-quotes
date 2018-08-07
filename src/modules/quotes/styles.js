@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import { colors } from '../../config';
+import { colors, fonts } from '../../config';
 
 export default EStyleSheet.create({
   container: {
@@ -16,7 +16,7 @@ export default EStyleSheet.create({
     justifyContent: 'center',
   },
   quoteText: {
-    fontFamily: 'System',
+    fontFamily: fonts.primaryLight,
     fontSize: '1.5rem',
     fontWeight: '200',
     color: colors.dark,
@@ -26,7 +26,7 @@ export default EStyleSheet.create({
     color: colors.light,
   },
   quoteAuthor: {
-    fontFamily: 'System',
+    fontFamily: fonts.primaryLight,
     color: colors.gray,
     fontSize: '1rem',
     fontWeight: '100',
@@ -56,7 +56,7 @@ export default EStyleSheet.create({
   },
   footerHelpText: {
     flex: 1,
-    fontFamily: 'System',
+    fontFamily: fonts.primaryLight,
     color: 'gray',
     fontSize: '1.2rem',
     fontWeight: '100',

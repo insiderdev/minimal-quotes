@@ -1,6 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import { colors } from '../../config';
+import { colors, fonts } from '../../config';
 
 export default EStyleSheet.create({
   container: {
@@ -13,7 +13,7 @@ export default EStyleSheet.create({
     marginBottom: '2rem',
   },
   sectionHeader: {
-    fontFamily: 'System',
+    fontFamily: fonts.primaryRegular,
     fontSize: '1rem',
     fontWeight: '200',
     color: colors.dark,

@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import { colors } from '../config';
+import { colors, fonts } from '../config';
 
 export default function ToggleButton(props) {
   const { selected, children } = props;
@@ -52,7 +52,7 @@ const styles = EStyleSheet.create({
     backgroundColor: colors.darkGray,
   },
   caption: {
-    fontFamily: 'System',
+    fontFamily: fonts.primaryLight,
     fontSize: '0.8rem',
     fontWeight: '300',
     color: colors.gray,
