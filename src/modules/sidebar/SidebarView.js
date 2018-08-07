@@ -19,9 +19,11 @@ export default function Sidebar(props) {
     categories,
     bgType,
     changeBgType,
+    toggleCategory,
+    selectAllCategories,
   } = props;
 
-  const hasUnselectedCategory = categories.filter(c => !c.selected).length > 0;
+  const hasUnselectedCategory = Object.keys(categories).filter(c => !categories[c]).length > 0;
 
   return (
     <View
@@ -70,18 +72,41 @@ export default function Sidebar(props) {
           <ToggleButton
             style={styles.sectionToggle}
             selected={!hasUnselectedCategory}
+            onPress={selectAllCategories}
           >
             All Categories
           </ToggleButton>
-          { categories.map(category => (
+          { Object.keys(categories).map(category => (
             <ToggleButton
-              key={category.id}
+              key={category}
               style={styles.sectionToggle}
-              selected={hasUnselectedCategory && category.selected}
+              selected={hasUnselectedCategory && categories[category]}
+              onPress={() => toggleCategory(category)}
             >
-              {category.name}
+              {category}
             </ToggleButton>
           ))}
+        </View>
+      </View>
+
+      <View style={styles.section}>
+        <Text
+          style={styles.sectionHeader}
+        >
+          Your quotes
+        </Text>
+
+        <View style={styles.sectionRow}>
+          <ToggleButton
+            style={styles.sectionToggle}
+          >
+            Show all
+          </ToggleButton>
+          <ToggleButton
+            style={styles.sectionToggle}
+          >
+            Show favorites
+          </ToggleButton>
         </View>
       </View>
     </View>

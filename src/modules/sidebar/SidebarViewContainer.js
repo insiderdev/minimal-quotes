@@ -5,6 +5,8 @@ import SidebarView from './SidebarView';
 
 import {
   changeBgType,
+  toggleCategory,
+  selectAllCategories,
 } from '../quotes/QuotesState';
 
 export default compose(
@@ -15,6 +17,8 @@ export default compose(
     }),
     dispatch => ({
       changeBgType: bgType => dispatch(changeBgType(bgType)),
+      toggleCategory: category => dispatch(toggleCategory(category)),
+      selectAllCategories: () => dispatch(selectAllCategories()),
     }),
   ),
 )(SidebarView);
