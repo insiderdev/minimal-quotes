@@ -16,6 +16,7 @@ const initialState = {
   currentQuote: null,
   isDarkBg: false,
   bgType: BG_TYPES.BG_RANDOM,
+  showFavorites: false,
   categories: {
     inspire: true,
     management: true,
@@ -33,6 +34,7 @@ export const NEXT_QUOTE = 'QuotesState/NEXT_QUOTE';
 export const TOGGLE_BOOKMARK = 'QuotesState/TOGGLE_BOOKMARK';
 export const CHANGE_BG_TYPE = 'QuotesState/CHANGE_BG_TYPE';
 export const TOGGLE_CATEGORY = 'QuotesState/TOGGLE_CATEGORY';
+export const TOGGLE_FAVORITES = 'QuotesState/TOGGLE_FAVORITES';
 export const SELECT_ALL_CATEGORIES = 'QuotesState/SELECT_ALL_CATEGORIES';
 
 /**
@@ -67,7 +69,12 @@ export function newQuote() {
     const state = getState();
     const allQuotes = state.quotes.quotesList;
 
-    let nextQuoteIndex = _.findIndex(allQuotes, q => state.quotes.categories[q.category]);
+    let nextQuoteIndex = _.findIndex(allQuotes, (q) => {
+      if (state.quotes.showFavorites) {
+        return state.quotes.categories[q.category] && q.bookmarked;
+      }
+      return state.quotes.categories[q.category];
+    });
     if (nextQuoteIndex < 0) nextQuoteIndex = 0;
     // As quotes sorted by displayedTimes, quote with index 0 would be
     // the quote with less views
@@ -107,6 +114,12 @@ export function toggleCategory(category) {
 export function selectAllCategories() {
   return {
     type: SELECT_ALL_CATEGORIES,
+  };
+}
+
+export function toggleFavorites() {
+  return {
+    type: TOGGLE_FAVORITES,
   };
 }
 
@@ -167,6 +180,11 @@ export default function QuotesReducer(state = initialState, action) {
         categories: {
           ...initialState.categories,
         },
+      };
+    case TOGGLE_FAVORITES:
+      return {
+        ...state,
+        showFavorites: !state.showFavorites,
       };
     default:
       return state;

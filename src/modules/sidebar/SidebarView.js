@@ -21,6 +21,8 @@ export default function Sidebar(props) {
     changeBgType,
     toggleCategory,
     selectAllCategories,
+    showFavorites,
+    toggleFavorites,
   } = props;
 
   const hasUnselectedCategory = Object.keys(categories).filter(c => !categories[c]).length > 0;
@@ -99,11 +101,15 @@ export default function Sidebar(props) {
         <View style={styles.sectionRow}>
           <ToggleButton
             style={styles.sectionToggle}
+            selected={!showFavorites}
+            onPress={toggleFavorites}
           >
             Show all
           </ToggleButton>
           <ToggleButton
             style={styles.sectionToggle}
+            selected={showFavorites}
+            onPress={toggleFavorites}
           >
             Show favorites
           </ToggleButton>
