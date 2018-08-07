@@ -52,8 +52,8 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
   footerIcon: {
-    height: '1.5rem',
-    width: '1.5rem',
+    height: '1rem',
+    width: '1rem',
     marginHorizontal: '0.5rem',
     tintColor: colors.dark,
   },

@@ -97,13 +97,15 @@ export default function QuotesView({
                 </TouchableWithoutFeedback>
 
                 <TouchableWithoutFeedback onPress={() => shareQuote()}>
-                  <AnimatedIconSwitch
-                    source={require('../../../assets/icons/share.png')}
-                    style={{
-                      ...styles.footerIcon,
-                      ...isDarkBg ? styles.footerIconLight : {},
-                    }}
-                  />
+                  <View>
+                    <AnimatedIconSwitch
+                      source={require('../../../assets/icons/share.png')}
+                      style={{
+                        ...styles.footerIcon,
+                        ...isDarkBg ? styles.footerIconLight : {},
+                      }}
+                    />
+                  </View>
                 </TouchableWithoutFeedback>
               </View>
             </View>
