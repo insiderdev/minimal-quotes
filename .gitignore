@@ -61,3 +61,4 @@ ios/Pods
 # Ignore sensitive files with private keys
 
 ios/GoogleService-Info.plist
+android/app/google-services.json
