@@ -5,6 +5,9 @@ import {
 } from 'react-native';
 import config from '../config';
 
+/**
+ * This component animates icon switch. It could animate opacity, tintColor and icon source.
+ */
 class AnimatedIconSwitch extends React.Component {
   constructor(props) {
     super(props);

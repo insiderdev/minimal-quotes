@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Animated,
   Easing,
@@ -6,7 +7,15 @@ import {
 
 import config from '../config';
 
+/**
+ * Component that animates background color change from light to dark.
+ * @param {boolean} isDark Determines the next color (is it dark or not)
+ */
 class AnimatedBackgroundSwitch extends React.Component {
+  static propTypes = {
+    isDark: PropTypes.bool.isRequired,
+  };
+
   constructor(props) {
     super(props);
 

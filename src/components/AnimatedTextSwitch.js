@@ -5,6 +5,10 @@ import {
 } from 'react-native';
 import config from '../config';
 
+/**
+ * Component to animate TextChange with opacity effect.
+ * It fades the previous text to opacity 0, changes text and animates opacity to 1 then.
+ */
 class AnimatedTextSwitch extends React.Component {
   constructor(props) {
     super(props);
