@@ -19,13 +19,13 @@ const initialState = {
   showFavorites: false,
   categories: {
     inspire: true,
-    management: true,
-    sports: true,
-    life: true,
-    funny: true,
-    love: true,
-    art: true,
-    students: true,
+    management: false,
+    sports: false,
+    life: false,
+    funny: false,
+    love: false,
+    art: false,
+    students: false,
   },
 };
 
