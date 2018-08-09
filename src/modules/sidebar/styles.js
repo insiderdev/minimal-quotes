@@ -7,6 +7,9 @@ export default EStyleSheet.create({
     flex: 1,
     padding: 20,
     paddingTop: '2rem',
+    backgroundColor: colors.dark,
+  },
+  containerDark: {
     backgroundColor: colors.light,
   },
   section: {
@@ -16,8 +19,11 @@ export default EStyleSheet.create({
     fontFamily: fonts.primaryRegular,
     fontSize: '1rem',
     fontWeight: '200',
-    color: colors.dark,
+    color: colors.light,
     marginBottom: '0.7rem',
+  },
+  sectionHeaderDark: {
+    color: colors.dark,
   },
   sectionHeaderLight: {
     color: colors.light,

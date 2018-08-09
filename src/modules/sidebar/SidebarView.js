@@ -8,6 +8,7 @@ import styles from './styles';
 
 import {
   ToggleButton,
+  AnimatedBackgroundSwitch,
 } from '../../components';
 
 import {
@@ -23,17 +24,22 @@ export default function Sidebar(props) {
     selectAllCategories,
     showFavorites,
     toggleFavorites,
+    isDarkBg,
   } = props;
 
   const hasUnselectedCategory = Object.keys(categories).filter(c => !categories[c]).length > 0;
 
   return (
-    <View
+    <AnimatedBackgroundSwitch
       style={styles.container}
+      isDark={!isDarkBg}
     >
       <View style={styles.section}>
         <Text
-          style={styles.sectionHeader}
+          style={[
+            styles.sectionHeader,
+            isDarkBg && styles.sectionHeaderDark,
+          ]}
         >
           Background Color
         </Text>
@@ -65,7 +71,10 @@ export default function Sidebar(props) {
 
       <View style={styles.section}>
         <Text
-          style={styles.sectionHeader}
+          style={[
+            styles.sectionHeader,
+            isDarkBg && styles.sectionHeaderDark,
+          ]}
         >
           Categories
         </Text>
@@ -78,7 +87,7 @@ export default function Sidebar(props) {
           >
             All Categories
           </ToggleButton>
-          { Object.keys(categories).map(category => (
+          { Object.keys(categories).sort().map(category => (
             <ToggleButton
               key={category}
               style={styles.sectionToggle}
@@ -93,7 +102,10 @@ export default function Sidebar(props) {
 
       <View style={styles.section}>
         <Text
-          style={styles.sectionHeader}
+          style={[
+            styles.sectionHeader,
+            isDarkBg && styles.sectionHeaderDark,
+          ]}
         >
           Your quotes
         </Text>
@@ -115,6 +127,6 @@ export default function Sidebar(props) {
           </ToggleButton>
         </View>
       </View>
-    </View>
+    </AnimatedBackgroundSwitch>
   );
 }

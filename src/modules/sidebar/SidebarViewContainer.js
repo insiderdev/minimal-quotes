@@ -16,6 +16,7 @@ export default compose(
       categories: state.quotes.categories,
       bgType: state.quotes.bgType,
       showFavorites: state.quotes.showFavorites,
+      isDarkBg: state.quotes.isDarkBg,
     }),
     dispatch => ({
       changeBgType: bgType => dispatch(changeBgType(bgType)),

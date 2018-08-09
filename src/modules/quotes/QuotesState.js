@@ -178,7 +178,14 @@ export default function QuotesReducer(state = initialState, action) {
       return {
         ...state,
         categories: {
-          ...initialState.categories,
+          inspire: true,
+          management: true,
+          sports: true,
+          life: true,
+          funny: true,
+          love: true,
+          art: true,
+          students: true,
         },
       };
     case TOGGLE_FAVORITES:
