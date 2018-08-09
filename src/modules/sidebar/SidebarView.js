@@ -46,6 +46,7 @@ export default function Sidebar(props) {
 
         <View style={styles.sectionRow}>
           <ToggleButton
+            isDark={isDarkBg}
             style={styles.sectionToggle}
             selected={bgType === BG_TYPES.BG_WHITE}
             onPress={() => changeBgType(BG_TYPES.BG_WHITE)}
@@ -53,6 +54,7 @@ export default function Sidebar(props) {
             White
           </ToggleButton>
           <ToggleButton
+            isDark={isDarkBg}
             style={styles.sectionToggle}
             selected={bgType === BG_TYPES.BG_BLACK}
             onPress={() => changeBgType(BG_TYPES.BG_BLACK)}
@@ -60,6 +62,7 @@ export default function Sidebar(props) {
             Black
           </ToggleButton>
           <ToggleButton
+            isDark={isDarkBg}
             style={styles.sectionToggle}
             selected={bgType === BG_TYPES.BG_RANDOM}
             onPress={() => changeBgType(BG_TYPES.BG_RANDOM)}
@@ -81,6 +84,7 @@ export default function Sidebar(props) {
 
         <View style={styles.sectionRow}>
           <ToggleButton
+            isDark={isDarkBg}
             style={styles.sectionToggle}
             selected={!hasUnselectedCategory}
             onPress={selectAllCategories}
@@ -89,6 +93,7 @@ export default function Sidebar(props) {
           </ToggleButton>
           { Object.keys(categories).sort().map(category => (
             <ToggleButton
+              isDark={isDarkBg}
               key={category}
               style={styles.sectionToggle}
               selected={hasUnselectedCategory && categories[category]}
@@ -112,6 +117,7 @@ export default function Sidebar(props) {
 
         <View style={styles.sectionRow}>
           <ToggleButton
+            isDark={isDarkBg}
             style={styles.sectionToggle}
             selected={!showFavorites}
             onPress={toggleFavorites}
@@ -119,6 +125,7 @@ export default function Sidebar(props) {
             Show all
           </ToggleButton>
           <ToggleButton
+            isDark={isDarkBg}
             style={styles.sectionToggle}
             selected={showFavorites}
             onPress={toggleFavorites}

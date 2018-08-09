@@ -9,14 +9,16 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 import { colors, fonts } from '../config';
 
 export default function ToggleButton(props) {
-  const { selected, children } = props;
+  const { selected, children, isDark } = props;
 
   return (
     <TouchableOpacity
       {...props}
       style={[
         styles.button,
+        isDark && styles.buttonDark,
         selected && styles.buttonSelected,
+        selected && isDark && styles.buttonSelectedDark,
         props.style,
       ]}
     >
@@ -24,6 +26,7 @@ export default function ToggleButton(props) {
         style={[
           styles.caption,
           selected && styles.captionSelected,
+          selected && isDark && styles.captionSelectedDark,
         ]}
       >
         {children}
@@ -46,9 +49,15 @@ const styles = EStyleSheet.create({
     paddingHorizontal: '0.8rem',
     paddingVertical: '0.6rem',
     borderRadius: '1.5rem',
+    backgroundColor: colors.darkGray,
+  },
+  buttonDark: {
     backgroundColor: colors.lightGray,
   },
   buttonSelected: {
+    backgroundColor: colors.light,
+  },
+  buttonSelectedDark: {
     backgroundColor: colors.darkGray,
   },
   caption: {
@@ -58,6 +67,9 @@ const styles = EStyleSheet.create({
     color: colors.gray,
   },
   captionSelected: {
+    color: colors.darkGray,
+  },
+  captionSelectedDark: {
     color: colors.light,
   },
 });
