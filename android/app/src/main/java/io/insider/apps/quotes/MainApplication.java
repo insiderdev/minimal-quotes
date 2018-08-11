@@ -3,6 +3,7 @@ package io.insider.apps.quotes;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.realm.react.RealmReactPackage;
 import cl.json.RNSharePackage;
 import cl.json.ShareApplication;
 import fr.greweb.reactnativeviewshot.RNViewShotPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ShareApplication, Re
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RealmReactPackage(),
             new RNSharePackage(),
             new RNViewShotPackage()
       );

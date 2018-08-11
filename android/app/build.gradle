@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':realm')
     compile 'com.google.firebase:firebase-core:16.0.0'
     compile project(':react-native-share')
     compile project(':react-native-view-shot')

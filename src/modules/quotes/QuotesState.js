@@ -1,7 +1,20 @@
 /* eslint-disable no-case-declarations,no-confusing-arrow */
 import _ from 'lodash';
+import Realm from 'realm';
 
 const quotesData = require('./data');
+
+const QuoteSchema = {
+  name: 'Quote',
+  properties: {
+    quote: 'string',
+    author: 'string',
+    displayedTimes: { type: 'int', default: 0 },
+    bookmarked: { type: 'bool', default: false },
+    id: 'int',
+    category: 'string',
+  },
+};
 
 export const BG_TYPES = {
   BG_WHITE: 'BG_WHITE',
@@ -10,8 +23,6 @@ export const BG_TYPES = {
 };
 
 const initialState = {
-  quotesList: [], // All quotes in the app
-  filteredQuotes: [], // Quotes with applied filters
   quotesLoaded: false,
   currentQuote: null,
   isDarkBg: false,
@@ -43,20 +54,27 @@ export const SELECT_ALL_CATEGORIES = 'QuotesState/SELECT_ALL_CATEGORIES';
  */
 export function loadQuotes() {
   return (dispatch) => {
-    // Modifying quotes array to add index and displayedTimes
-    const modifiedQuotes = quotesData
-      .quotes
-      .map((quote, index) => ({
-        ...quote,
-        displayedTimes: 0,
-        bookmarked: false,
-        id: index,
-      }));
+    Realm.open({ schema: [QuoteSchema] })
+      .then((realm) => {
+        realm.write(() => {
+          quotesData.quotes.forEach((quote, index) => {
+            realm.create('Quote', {
+              ...quote,
+              author: quote.author || 'Unknown',
+              displayedTimes: 0,
+              bookmarked: false,
+              id: index,
+            });
+          });
+        });
 
-    dispatch({
-      type: LOAD_QUOTES,
-      payload: _.shuffle(modifiedQuotes),
-    });
+        dispatch({
+          type: LOAD_QUOTES,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 }
 
@@ -67,27 +85,41 @@ export function loadQuotes() {
 export function newQuote() {
   return (dispatch, getState) => {
     const state = getState();
-    const allQuotes = state.quotes.quotesList;
 
-    let nextQuoteIndex = _.findIndex(allQuotes, (q) => {
-      if (state.quotes.showFavorites) {
-        return state.quotes.categories[q.category] && q.bookmarked;
-      }
-      return state.quotes.categories[q.category];
-    });
-    if (nextQuoteIndex < 0) nextQuoteIndex = 0;
-    // As quotes sorted by displayedTimes, quote with index 0 would be
-    // the quote with less views
-    const nextQuote = allQuotes[nextQuoteIndex];
-    nextQuote.displayedTimes += 1;
+    Realm.open({ schema: [QuoteSchema] })
+      .then((realm) => {
+        const quotes = realm.objects('Quote');
+        let filterExpression = Object.keys(state.quotes.categories)
+          .reduce((accumulator, currentValue) => {
+            if (state.quotes.categories[currentValue]) {
+              if (accumulator.length === 0) {
+                return `category = "${currentValue}"`;
+              }
+              return `${accumulator} OR category = "${currentValue}"`;
+            }
+            return accumulator;
+          }, '');
 
-    dispatch({
-      type: NEXT_QUOTE,
-      payload: {
-        nextQuote,
-        index: nextQuoteIndex,
-      },
-    });
+        if (state.quotes.showFavorites) {
+          filterExpression += ' AND bookmarked = true';
+        }
+
+        const nextQuote = quotes.filtered(filterExpression).sorted('displayedTimes')[0];
+
+        realm.write(() => {
+          nextQuote.displayedTimes += 1;
+
+          dispatch({
+            type: NEXT_QUOTE,
+            payload: {
+              nextQuote: JSON.parse(JSON.stringify(nextQuote)),
+              index: nextQuote.id,
+            },
+          });
+        });
+
+        realm.close();
+      });
   };
 }
 
@@ -98,9 +130,20 @@ export function changeBgType(newBgType) {
   };
 }
 
-export function toggleBookmark() {
-  return {
-    type: TOGGLE_BOOKMARK,
+export function toggleBookmark(quoteToBookmark) {
+  return (dispatch) => {
+    dispatch({
+      type: TOGGLE_BOOKMARK,
+    });
+    Realm.open({ schema: [QuoteSchema] })
+      .then((realm) => {
+        const quote = realm.objects('Quote').filtered(`id = ${quoteToBookmark.id}`)[0];
+        realm.write(() => {
+          quote.bookmarked = !quote.bookmarked;
+        });
+
+        realm.close();
+      });
   };
 }
 
@@ -128,31 +171,17 @@ export default function QuotesReducer(state = initialState, action) {
     case LOAD_QUOTES:
       return {
         ...state,
-        quotesList: action.payload,
         quotesLoaded: true,
       };
     case NEXT_QUOTE:
-      // TODO: Don't mutate this shit here
-      _.pullAt(state.quotesList, action.payload.index);
       return {
         ...state,
         currentQuote: action.payload.nextQuote,
-        quotesList: [
-          ...state.quotesList,
-          action.payload.nextQuote,
-        ],
         isDarkBg: state.bgType === BG_TYPES.BG_RANDOM ? !!_.random(0, 1) : state.isDarkBg,
       };
     case TOGGLE_BOOKMARK:
       return {
         ...state,
-        quotesList: [
-          ..._.initial(state.quotesList),
-          {
-            ...state.currentQuote,
-            bookmarked: !state.currentQuote.bookmarked,
-          },
-        ],
         currentQuote: {
           ...state.currentQuote,
           bookmarked: !state.currentQuote.bookmarked,
