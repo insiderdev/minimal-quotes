@@ -8,6 +8,7 @@ export default EStyleSheet.create({
     padding: 20,
     paddingTop: '2rem',
     backgroundColor: colors.dark,
+    justifyContent: 'space-between',
   },
   containerDark: {
     backgroundColor: colors.light,
@@ -46,5 +47,21 @@ export default EStyleSheet.create({
   sectionToggle: {
     marginRight: '0.5rem',
     marginVertical: '0.3rem',
+  },
+  creditsContainer: {
+    alignSelf: 'flex-end',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingTop: '1rem',
+  },
+  creditsText: {
+    fontFamily: fonts.primaryLight,
+    fontSize: '1rem',
+    fontWeight: '200',
+    color: colors.gray,
+    marginBottom: '0.7rem',
+  },
+  creditsTextDark: {
+    color: colors.light,
   },
 });

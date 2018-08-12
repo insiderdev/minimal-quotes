@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
+import { Linking } from 'react-native';
+import { compose, withHandlers } from 'recompose';
 
+import { credentialsLink } from '../../config';
 import SidebarView from './SidebarView';
 
 import {
@@ -25,4 +27,13 @@ export default compose(
       toggleFavorites: () => dispatch(toggleFavorites()),
     }),
   ),
+  withHandlers({
+    openCredits: () => () => {
+      Linking.canOpenURL(credentialsLink).then((supported) => {
+        if (supported) {
+          Linking.openURL(credentialsLink);
+        }
+      });
+    },
+  }),
 )(SidebarView);

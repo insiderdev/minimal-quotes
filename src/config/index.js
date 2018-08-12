@@ -22,3 +22,5 @@ export const fonts = {
 export default {
   defaultAnimationDuration: 400,
 };
+
+export const credentialsLink = 'https://apps.insider.io';
