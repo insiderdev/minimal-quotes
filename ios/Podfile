@@ -13,6 +13,8 @@ target 'quotes' do
   target 'quotes-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
   end
 
   target 'quotesTests' do

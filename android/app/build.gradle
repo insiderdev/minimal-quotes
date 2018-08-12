@@ -74,10 +74,12 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+    entryFile: "index.js",
+    nodeExecutableAndArgs : ["/usr/local/bin/node"]
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -138,6 +140,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-code-push')
     compile project(':realm')
     compile 'com.google.firebase:firebase-core:16.0.0'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'

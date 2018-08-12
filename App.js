@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import React from 'react';
+import codePush from 'react-native-code-push';
 import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -7,7 +8,7 @@ import { store, persistor } from './src/redux/store';
 
 import Navigator from './src/modules/navigation/Navigator';
 
-export default function App() {
+function App() {
   return (
     <Provider store={store}>
       <PersistGate
@@ -32,3 +33,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
+
+export default codePush(App);

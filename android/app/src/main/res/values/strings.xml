@@ -1,3 +1,4 @@
 <resources>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">0xUoO3OVVkg6kjgRoScjuTSCrCeHH1rV1R6r7</string>
     <string name="app_name">Minimal Quotes</string>
 </resources>
