@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { NavigationEvents } from 'react-navigation';
 import {
   View,
   Text,
@@ -15,6 +16,8 @@ export default function BookmarksView(props) {
     isDarkBg,
     navigation,
     bookmarksList,
+    updateBookmarks,
+    onWillFocus,
   } = props;
 
   console.log(bookmarksList);
@@ -26,6 +29,9 @@ export default function BookmarksView(props) {
         isDarkBg && styles.containerDark,
       ]}
     >
+      <NavigationEvents
+        onWillFocus={onWillFocus}
+      />
       <View
         style={styles.header}
       >
@@ -63,6 +69,7 @@ export default function BookmarksView(props) {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.quote}
+            onPress={() => navigation.navigate('Quote', { quote: item, updateBookmarks })}
           >
             <Text
               style={[

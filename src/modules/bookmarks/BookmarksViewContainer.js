@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Realm from 'realm';
 import {
-  compose, lifecycle, withState, withHandlers,
+  compose, withState, withHandlers,
 } from 'recompose';
 
 import { QuoteSchema } from '../quotes/QuotesState';
@@ -33,9 +33,9 @@ export default compose(
         });
     },
   }),
-  lifecycle({
-    componentDidMount() {
-      this.props.updateBookmarks();
+  withHandlers({
+    onWillFocus: props => () => {
+      props.updateBookmarks();
     },
   }),
 )(BookmarksView);
