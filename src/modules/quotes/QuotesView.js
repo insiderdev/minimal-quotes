@@ -5,6 +5,7 @@ import {
   Animated,
   TouchableOpacity,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import SideMenu from 'react-native-side-menu';
 
@@ -17,6 +18,7 @@ import {
 } from '../../components';
 
 import styles from './styles';
+import { colors } from '../../config';
 
 export default function QuotesView({
   currentQuote,
@@ -29,7 +31,16 @@ export default function QuotesView({
   isMenuOpened,
   setIsMenuOpened,
   navigation,
+  quotesLoaded,
 }) {
+  if (!quotesLoaded) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator color={colors.light} />
+      </View>
+    );
+  }
+
   return (
     <SideMenu
       openMenuOffset={Dimensions.get('window').width / 5 * 4}

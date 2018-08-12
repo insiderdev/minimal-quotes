@@ -8,6 +8,12 @@ export default EStyleSheet.create({
     padding: 20,
     backgroundColor: colors.light,
   },
+  loadingContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.dark,
+  },
   containerDark: {
     backgroundColor: colors.dark,
   },
