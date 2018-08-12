@@ -9,15 +9,10 @@ target 'quotes' do
   pod 'Firebase/Core'
   pod 'Fabric', '~> 1.7.9'
   pod 'Crashlytics', '~> 3.10.5'
-  pod 'Firebase/Firestore'
 
   target 'quotes-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
-    pod 'RNViewShot', :path => '../node_modules/react-native-view-shot'
-
-    pod 'RNShare', :path => '../node_modules/react-native-share'
-
   end
 
   target 'quotesTests' do
