@@ -82,6 +82,18 @@ export default function BookmarksView(props) {
             <Text style={styles.quoteAuthor}>{item.author}</Text>
           </TouchableOpacity>
         )}
+        ListEmptyComponent={(
+          <View style={styles.emptyContainer}>
+            <Text
+              style={[
+                styles.emptyText,
+                isDarkBg && styles.emptyTextDark,
+              ]}
+            >
+              You have no favorite quotes yet
+            </Text>
+          </View>
+        )}
       />
     </View>
   );

@@ -57,4 +57,20 @@ export default EStyleSheet.create({
     color: colors.gray,
     marginTop: '0.8rem',
   },
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '2rem',
+  },
+  emptyText: {
+    fontFamily: fonts.primaryLight,
+    fontWeight: '200',
+    fontSize: '0.8rem',
+    color: colors.dark,
+    textAlign: 'center',
+  },
+  emptyTextDark: {
+    color: colors.light,
+  },
 });
