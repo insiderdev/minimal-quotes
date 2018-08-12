@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
 } from 'react-native';
 
 import styles from './styles';
@@ -9,11 +10,13 @@ import styles from './styles';
 import {
   ToggleButton,
   AnimatedBackgroundSwitch,
+  AnimatedIconSwitch,
 } from '../../components';
 
 import {
   BG_TYPES,
 } from '../quotes/QuotesState';
+
 
 export default function Sidebar(props) {
   const {
@@ -22,9 +25,8 @@ export default function Sidebar(props) {
     changeBgType,
     toggleCategory,
     selectAllCategories,
-    showFavorites,
-    toggleFavorites,
     isDarkBg,
+    navigation,
   } = props;
 
   const hasUnselectedCategory = Object.keys(categories).filter(c => !categories[c]).length > 0;
@@ -34,6 +36,28 @@ export default function Sidebar(props) {
       style={styles.container}
       isDark={!isDarkBg}
     >
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Bookmarks')}
+        style={[styles.section, styles.sectionLink]}
+      >
+        <Text
+          style={[
+            styles.sectionHeader,
+            isDarkBg && styles.sectionHeaderDark,
+          ]}
+        >
+          My Favorites
+        </Text>
+
+        <AnimatedIconSwitch
+          isDark={isDarkBg}
+          source={require('../../../assets/icons/arrow-right.png')}
+          style={{
+            ...styles.sectionLinkIcon,
+            ...isDarkBg ? styles.sectionLinkIconDark : {},
+          }}
+        />
+      </TouchableOpacity>
       <View style={styles.section}>
         <Text
           style={[
@@ -102,36 +126,6 @@ export default function Sidebar(props) {
               {category}
             </ToggleButton>
           ))}
-        </View>
-      </View>
-
-      <View style={styles.section}>
-        <Text
-          style={[
-            styles.sectionHeader,
-            isDarkBg && styles.sectionHeaderDark,
-          ]}
-        >
-          Your quotes
-        </Text>
-
-        <View style={styles.sectionRow}>
-          <ToggleButton
-            isDark={isDarkBg}
-            style={styles.sectionToggle}
-            selected={!showFavorites}
-            onPress={toggleFavorites}
-          >
-            Show all
-          </ToggleButton>
-          <ToggleButton
-            isDark={isDarkBg}
-            style={styles.sectionToggle}
-            selected={showFavorites}
-            onPress={toggleFavorites}
-          >
-            Show favorites
-          </ToggleButton>
         </View>
       </View>
     </AnimatedBackgroundSwitch>

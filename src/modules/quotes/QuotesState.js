@@ -4,7 +4,13 @@ import Realm from 'realm';
 
 const quotesData = require('./data');
 
-const QuoteSchema = {
+export const BG_TYPES = {
+  BG_WHITE: 'BG_WHITE',
+  BG_BLACK: 'BG_BLACK',
+  BG_RANDOM: 'BG_RANDOM',
+};
+
+export const QuoteSchema = {
   name: 'Quote',
   properties: {
     quote: 'string',
@@ -13,13 +19,8 @@ const QuoteSchema = {
     bookmarked: { type: 'bool', default: false },
     id: 'int',
     category: 'string',
+    bgType: { type: 'string', optional: true, default: BG_TYPES.BG_WHITE },
   },
-};
-
-export const BG_TYPES = {
-  BG_WHITE: 'BG_WHITE',
-  BG_BLACK: 'BG_BLACK',
-  BG_RANDOM: 'BG_RANDOM',
 };
 
 const initialState = {
@@ -131,7 +132,8 @@ export function changeBgType(newBgType) {
 }
 
 export function toggleBookmark(quoteToBookmark) {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    const state = getState();
     dispatch({
       type: TOGGLE_BOOKMARK,
     });
@@ -140,6 +142,7 @@ export function toggleBookmark(quoteToBookmark) {
         const quote = realm.objects('Quote').filtered(`id = ${quoteToBookmark.id}`)[0];
         realm.write(() => {
           quote.bookmarked = !quote.bookmarked;
+          quote.bgType = state.quotes.isDarkBg ? BG_TYPES.BG_BLACK : BG_TYPES.BG_WHITE;
         });
 
         realm.close();

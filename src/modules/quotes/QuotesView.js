@@ -28,6 +28,7 @@ export default function QuotesView({
   isSharing,
   isMenuOpened,
   setIsMenuOpened,
+  navigation,
 }) {
   return (
     <SideMenu
@@ -35,7 +36,7 @@ export default function QuotesView({
       isOpen={isMenuOpened}
       onChange={setIsMenuOpened}
       menuPosition="right"
-      menu={<Sidebar />}
+      menu={<Sidebar navigation={navigation} />}
       bounceBackOnOverdraw={false}
       animationFunction={(prop, value) => Animated.timing(prop, {
         toValue: value,

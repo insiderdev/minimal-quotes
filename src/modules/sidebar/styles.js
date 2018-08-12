@@ -15,6 +15,17 @@ export default EStyleSheet.create({
   section: {
     marginBottom: '2rem',
   },
+  sectionLink: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  sectionLinkIcon: {
+    height: '1rem',
+    tintColor: colors.light,
+  },
+  sectionLinkIconDark: {
+    tintColor: colors.dark,
+  },
   sectionHeader: {
     fontFamily: fonts.primaryRegular,
     fontSize: '1rem',
