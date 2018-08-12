@@ -135,10 +135,7 @@ export default function Sidebar(props) {
       <View style={styles.creditsContainer}>
         <TouchableOpacity onPress={openCredits}>
           <Text
-            style={[
-              styles.creditsText,
-              isDarkBg && styles.creditsTextDark,
-            ]}
+            style={styles.creditsText}
           >
             credits
           </Text>

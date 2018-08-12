@@ -61,7 +61,4 @@ export default EStyleSheet.create({
     color: colors.gray,
     marginBottom: '0.7rem',
   },
-  creditsTextDark: {
-    color: colors.light,
-  },
 });
