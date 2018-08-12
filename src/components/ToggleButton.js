@@ -49,7 +49,7 @@ const styles = EStyleSheet.create({
     paddingHorizontal: '0.8rem',
     paddingVertical: '0.6rem',
     borderRadius: '1.5rem',
-    backgroundColor: colors.darkGray,
+    backgroundColor: colors.flatDarkGray,
   },
   buttonDark: {
     backgroundColor: colors.lightGray,

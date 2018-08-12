@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   TouchableWithoutFeedback,
@@ -12,6 +13,25 @@ import {
 
 import styles from '../quotes/styles';
 import { BG_TYPES } from '../quotes/QuotesState';
+
+QuoteView.propTypes = {
+  navigation: PropTypes.shape({
+    pop: PropTypes.func.isRequired,
+    state: PropTypes.shape({
+      params: PropTypes.shape({
+        quote: PropTypes.shape({
+          quote: PropTypes.string,
+          author: PropTypes.string,
+        }),
+      }),
+    }),
+  }).isRequired,
+  updateContainerRef: PropTypes.func.isRequired,
+  toggleBookmark: PropTypes.func.isRequired,
+  shareQuote: PropTypes.func.isRequired,
+  isSharing: PropTypes.bool.isRequired,
+  isBookmarked: PropTypes.bool.isRequired,
+};
 
 export default function QuoteView(props) {
   const {
@@ -79,7 +99,7 @@ export default function QuoteView(props) {
             </AnimatedTextSwitch>
 
             <View style={styles.footerIcons}>
-              <TouchableWithoutFeedback onPress={() => toggleBookmark()}>
+              <TouchableWithoutFeedback onPress={toggleBookmark}>
                 <View>
                   <AnimatedIconSwitch
                     source={isBookmarked ?
@@ -94,7 +114,7 @@ export default function QuoteView(props) {
                 </View>
               </TouchableWithoutFeedback>
 
-              <TouchableWithoutFeedback onPress={() => shareQuote()}>
+              <TouchableWithoutFeedback onPress={shareQuote}>
                 <View>
                   <AnimatedIconSwitch
                     source={require('../../../assets/icons/share.png')}

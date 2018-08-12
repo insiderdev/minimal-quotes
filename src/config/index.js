@@ -6,6 +6,7 @@ export const colors = {
   gray: '#96979F',
   lightGray: '#F4F6F8',
   darkGray: '#323643',
+  flatDarkGray: '#2B2B2B',
 };
 
 export const fonts = {

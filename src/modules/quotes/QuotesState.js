@@ -10,8 +10,11 @@ export const BG_TYPES = {
   BG_RANDOM: 'BG_RANDOM',
 };
 
+
+// Realm schema of the quote
 export const QuoteSchema = {
   name: 'Quote',
+  primaryKey: 'id',
   properties: {
     quote: 'string',
     author: 'string',
@@ -29,6 +32,7 @@ const initialState = {
   isDarkBg: false,
   bgType: BG_TYPES.BG_RANDOM,
   showFavorites: false,
+  // TODO: Put it inside Realm db
   categories: {
     inspire: true,
     management: false,
@@ -46,11 +50,10 @@ export const NEXT_QUOTE = 'QuotesState/NEXT_QUOTE';
 export const TOGGLE_BOOKMARK = 'QuotesState/TOGGLE_BOOKMARK';
 export const CHANGE_BG_TYPE = 'QuotesState/CHANGE_BG_TYPE';
 export const TOGGLE_CATEGORY = 'QuotesState/TOGGLE_CATEGORY';
-export const TOGGLE_FAVORITES = 'QuotesState/TOGGLE_FAVORITES';
 export const SELECT_ALL_CATEGORIES = 'QuotesState/SELECT_ALL_CATEGORIES';
 
 /**
- * Initial quotes loading into the redux store
+ * Initial quotes loading into the redux store and fill Realm DB
  * @returns {Function} Dispatches LOAD_QUOTES action with new quotes
  */
 export function loadQuotes() {
@@ -72,9 +75,6 @@ export function loadQuotes() {
         dispatch({
           type: LOAD_QUOTES,
         });
-      })
-      .catch((e) => {
-        console.log(e);
       });
   };
 }
@@ -89,8 +89,11 @@ export function newQuote() {
 
     Realm.open({ schema: [QuoteSchema] })
       .then((realm) => {
+        // Get all quotes
         const quotes = realm.objects('Quote');
-        let filterExpression = Object.keys(state.quotes.categories)
+
+        // Create realm query with selected categories
+        const filterExpression = Object.keys(state.quotes.categories)
           .reduce((accumulator, currentValue) => {
             if (state.quotes.categories[currentValue]) {
               if (accumulator.length === 0) {
@@ -101,10 +104,7 @@ export function newQuote() {
             return accumulator;
           }, '');
 
-        if (state.quotes.showFavorites) {
-          filterExpression += ' AND bookmarked = true';
-        }
-
+        // Pick the next quote sorted by displayed times
         const nextQuote = quotes.filtered(filterExpression).sorted('displayedTimes')[0];
 
         realm.write(() => {
@@ -163,12 +163,6 @@ export function selectAllCategories() {
   };
 }
 
-export function toggleFavorites() {
-  return {
-    type: TOGGLE_FAVORITES,
-  };
-}
-
 export default function QuotesReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_QUOTES:
@@ -219,11 +213,6 @@ export default function QuotesReducer(state = initialState, action) {
           art: true,
           students: true,
         },
-      };
-    case TOGGLE_FAVORITES:
-      return {
-        ...state,
-        showFavorites: !state.showFavorites,
       };
     default:
       return state;

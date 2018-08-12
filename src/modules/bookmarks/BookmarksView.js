@@ -16,11 +16,8 @@ export default function BookmarksView(props) {
     isDarkBg,
     navigation,
     bookmarksList,
-    updateBookmarks,
     onWillFocus,
   } = props;
-
-  console.log(bookmarksList);
 
   return (
     <View
@@ -29,9 +26,11 @@ export default function BookmarksView(props) {
         isDarkBg && styles.containerDark,
       ]}
     >
+      {/** To update bookmarks list when the user navigate to the screen */}
       <NavigationEvents
         onWillFocus={onWillFocus}
       />
+
       <View
         style={styles.header}
       >
@@ -69,7 +68,7 @@ export default function BookmarksView(props) {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={styles.quote}
-            onPress={() => navigation.navigate('Quote', { quote: item, updateBookmarks })}
+            onPress={() => navigation.navigate('Quote', { quote: item })}
           >
             <Text
               style={[
@@ -100,9 +99,13 @@ export default function BookmarksView(props) {
 }
 
 BookmarksView.propTypes = {
-  isBookmarksLoaded: PropTypes.bool.isRequired,
+  isDarkBg: PropTypes.bool.isRequired,
+  navigation: PropTypes.shape({
+    pop: PropTypes.func.isRequired,
+  }).isRequired,
   bookmarksList: PropTypes.arrayOf(PropTypes.shape({
     quote: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
   })).isRequired,
+  onWillFocus: PropTypes.func.isRequired,
 };

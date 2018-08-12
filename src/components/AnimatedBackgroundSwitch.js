@@ -43,6 +43,7 @@ class AnimatedBackgroundSwitch extends React.Component {
   }
 
   render() {
+    // Interpolating color to make a smooth transition
     const color = this.state.bgColor.interpolate({
       inputRange: [0, 1],
       outputRange: ['rgba(0, 0, 0, 1.0)', 'rgba(255, 255, 255, 1.0)'],

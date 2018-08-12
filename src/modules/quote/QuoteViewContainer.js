@@ -11,22 +11,27 @@ export default compose(
   withState('isSharing', 'setIsSharing', false),
   withState('isBookmarked', 'setIsBookmarked', true),
   withHandlers(() => {
+    // Reference to container element
     let _containerRef = null;
     return {
       updateContainerRef: () => (ref) => {
         _containerRef = ref;
       },
       shareQuote: props => async () => {
+        // isSharing prop hides components before making a screen shot
         props.setIsSharing(true);
 
+        // setTimeout to ensure that component will be re-rendered
         setTimeout(async () => {
           if (_containerRef) {
             try {
+              // Capturing screenshot of the view by ref
               const uri = await captureRef(_containerRef, {
                 format: 'jpg',
                 quality: 1,
               });
 
+              // Sharing captured screenshot
               await Share.open({
                 url: uri,
               });
@@ -43,6 +48,7 @@ export default compose(
 
         const { quote } = props.navigation.state.params;
 
+        // Updating the quote inside database
         Realm.open({ schema: [QuoteSchema] })
           .then((realm) => {
             const realmQuote = realm.objects('Quote').filtered(`id = ${quote.id}`)[0];

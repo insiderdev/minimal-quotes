@@ -14,26 +14,26 @@ export default compose(
       isDarkBg: state.quotes.isDarkBg,
     }),
   ),
-  withState('isBookmarksLoaded', 'setBookmarksLoaded', false),
   withState('bookmarksList', 'setBookmarksList', []),
   withHandlers({
     updateBookmarks: props => () => {
-      props.setBookmarksLoaded(false);
       Realm.open({ schema: [QuoteSchema] })
         .then((realm) => {
+          // Selecting all bookmarked quotes
           const bookmarks = realm.objects('Quote').filtered('bookmarked = true');
 
+          // Need to convert Realm object to JS TODO: Find better solution
           const bookmarksJSed = JSON.parse(JSON.stringify(bookmarks));
           const bookmarksArray = [];
           Object.keys(bookmarksJSed).forEach(index => bookmarksArray.push(bookmarksJSed[index]));
 
           props.setBookmarksList(bookmarksArray);
-          props.setBookmarksLoaded(true);
           realm.close();
         });
     },
   }),
   withHandlers({
+    // Handler that fires when the user navigate on the screen
     onWillFocus: props => () => {
       props.updateBookmarks();
     },
