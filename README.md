@@ -6,8 +6,8 @@ Minimal quotes is React Native application for both Android and iOS that throws 
 
 The app is designed as a part of [Project365](https://project365.design/2018/05/07/day-127-minimal-quotes-app-concept/)
 
-<a href='https://project365.design/2018/05/07/day-127-minimal-quotes-app-concept/'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
-<a href='https://project365.design/2018/05/07/day-127-minimal-quotes-app-concept/'><img width="200" alt='Download on App Store' src='https://i.imgur.com/7IxtMV0.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=io.insider.apps.quotes'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=io.insider.apps.quotes'><img width="200" alt='Download on App Store' src='https://i.imgur.com/7IxtMV0.png'/></a>
 
 ## Some technical stuff used inside
 - React Native to build an app for both Android and iOS
