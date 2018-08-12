@@ -11,6 +11,7 @@ The app is designed as a part of [Project365](https://project365.design/2018/05/
 
 ## Some technical stuff used inside
 - React Native to build an app for both Android and iOS
+- [Realm database](https://realm.io/docs/javascript/latest) to manage quotes data
 - [Redux](https://redux.js.org/) and [Redux thunk](https://github.com/reduxjs/redux-thunk) for state management
 - Modular architecture inspired by [this kit](https://github.com/futurice/pepperoni-app-kit)
 - [Recompose](https://github.com/acdlite/recompose) to keep component-container structure
