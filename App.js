@@ -14,7 +14,7 @@ function App() {
       <PersistGate
         loading={(
           <View style={styles.container}>
-            <ActivityIndicator />
+            <ActivityIndicator color="#FFFFFF" />
           </View>
         )}
         persistor={persistor}
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'black',
   },
 });
 
