@@ -193,12 +193,30 @@ export default function QuotesReducer(state = initialState, action) {
           (action.payload === BG_TYPES.BG_RANDOM ? state.isDarkBg : true),
       };
     case TOGGLE_CATEGORY:
+      const isAllCategoriesSelected =
+        // All categories
+        Object.keys(state.categories)
+          // Filtered by unselected
+          .filter(c => !state.categories[c])
+          // Length is greater than 0
+          .length === 0;
+
       return {
         ...state,
-        categories: {
-          ...state.categories,
-          [action.payload]: !state.categories[action.payload],
-        },
+        categories:
+          // If all categories selected
+          isAllCategoriesSelected ?
+            {
+              // Mark all as unselected
+              ...Object.keys(state.categories).reduce((a, c) => ({ ...a, [c]: false }), {}),
+              // Except this one
+              [action.payload]: true,
+            } :
+            {
+              ...state.categories,
+              [action.payload]: !state.categories[action.payload],
+            }
+        ,
       };
     case SELECT_ALL_CATEGORIES:
       return {

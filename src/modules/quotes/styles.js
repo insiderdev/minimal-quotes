@@ -66,11 +66,16 @@ export default EStyleSheet.create({
     color: 'gray',
     fontSize: '1.2rem',
     fontWeight: '100',
+    paddingVertical: '0.5rem',
   },
   footerIcons: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
+  },
+  footerIconContainer: {
+    paddingVertical: '0.5rem',
+    paddingHorizontal: '0.3rem',
   },
   footerIcon: {
     height: '1.2rem',

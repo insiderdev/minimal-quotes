@@ -100,7 +100,7 @@ export default function QuoteView(props) {
 
             <View style={styles.footerIcons}>
               <TouchableWithoutFeedback onPress={toggleBookmark}>
-                <View>
+                <View style={styles.footerIconContainer}>
                   <AnimatedIconSwitch
                     source={isBookmarked ?
                       require('../../../assets/icons/bookmark-filled.png') :
@@ -115,7 +115,7 @@ export default function QuoteView(props) {
               </TouchableWithoutFeedback>
 
               <TouchableWithoutFeedback onPress={shareQuote}>
-                <View>
+                <View style={styles.footerIconContainer}>
                   <AnimatedIconSwitch
                     source={require('../../../assets/icons/share.png')}
                     style={{
