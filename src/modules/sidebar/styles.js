@@ -1,5 +1,6 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
+import { ifIphoneX } from 'react-native-iphone-x-helper/index';
 import { colors, fonts } from '../../config';
 
 export default EStyleSheet.create({
@@ -9,6 +10,10 @@ export default EStyleSheet.create({
     paddingTop: '2rem',
     backgroundColor: colors.dark,
     justifyContent: 'space-between',
+    ...ifIphoneX({
+      paddingTop: 50,
+      paddingBottom: 30,
+    }),
   },
   containerDark: {
     backgroundColor: colors.light,

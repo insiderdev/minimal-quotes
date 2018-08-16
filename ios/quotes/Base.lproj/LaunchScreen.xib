@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon" translatesAutoresizingMaskIntoConstraints="NO" id="hO0-3S-8D8">
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconSplash" translatesAutoresizingMaskIntoConstraints="NO" id="hO0-3S-8D8">
                     <rect key="frame" x="190" y="190" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="3Bp-68-EWS"/>
@@ -34,6 +34,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon" width="512" height="512"/>
+        <image name="IconSplash" width="143" height="80"/>
     </resources>
 </document>

@@ -193,13 +193,24 @@ export default function QuotesReducer(state = initialState, action) {
           (action.payload === BG_TYPES.BG_RANDOM ? state.isDarkBg : true),
       };
     case TOGGLE_CATEGORY:
-      const isAllCategoriesSelected =
+      const selectedCategoriesCount =
         // All categories
         Object.keys(state.categories)
-          // Filtered by unselected
-          .filter(c => !state.categories[c])
-          // Length is greater than 0
-          .length === 0;
+          // Filtered by selected
+          .filter(c => state.categories[c]);
+
+      const isAllCategoriesSelected =
+        selectedCategoriesCount.length ===
+        Object.keys(state.categories).length;
+
+      const isOnlyOneCategorySelected = selectedCategoriesCount.length === 1;
+
+      // If the user tries to unselect the only selected category
+      if (isOnlyOneCategorySelected && state.categories[action.payload]) {
+        return {
+          ...state,
+        };
+      }
 
       return {
         ...state,
