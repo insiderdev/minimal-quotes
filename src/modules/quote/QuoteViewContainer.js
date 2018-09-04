@@ -35,8 +35,10 @@ export default compose(
               await Share.open({
                 url: uri,
               });
-            } catch (error) {
-              Alert.alert('Something went wrong', 'We are so sorry, but something unexpected happened :(');
+            } catch (e) {
+              if (e.error !== 'User did not share') {
+                Alert.alert('Something went wrong', 'We are so sorry, but something unexpected happened :(');
+              }
             } finally {
               props.setIsSharing(false);
             }
