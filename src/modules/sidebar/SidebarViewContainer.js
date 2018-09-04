@@ -9,7 +9,6 @@ import {
   changeBgType,
   toggleCategory,
   selectAllCategories,
-  toggleFavorites,
 } from '../quotes/QuotesState';
 
 export default compose(
@@ -24,7 +23,6 @@ export default compose(
       changeBgType: bgType => dispatch(changeBgType(bgType)),
       toggleCategory: category => dispatch(toggleCategory(category)),
       selectAllCategories: () => dispatch(selectAllCategories()),
-      toggleFavorites: () => dispatch(toggleFavorites()),
     }),
   ),
   withHandlers({
