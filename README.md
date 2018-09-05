@@ -10,6 +10,10 @@ The app is designed as a part of [Project365](https://project365.design/2018/05/
 <a target="_blank" href='https://itunes.apple.com/us/app/minimal-quotes/id1428585029'><img width="200" alt='Download on App Store' src='https://i.imgur.com/7IxtMV0.png'/></a>
 
 ## Some technical stuff used inside
+[![Travis Build Status](https://travis-ci.org/insiderdev/minimal-quotes.svg?branch=master)](https://travis-ci.org/insiderdev/minimal-quotes)
+[![App Center Android Build status](https://build.appcenter.ms/v0.1/apps/82ffe318-4c3f-4041-9df0-1c0835135523/branches/master/badge)](https://appcenter.ms)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b74df8c4d8dd4409962065cc91d87b1e)](https://www.codacy.com/app/sdgaykov/minimal-quotes?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gaykov/minimal-quotes&amp;utm_campaign=Badge_Grade)
+
 - React Native to build an app for both Android and iOS
 - [Realm database](https://realm.io/docs/javascript/latest) to manage quotes data
 - [Redux](https://redux.js.org/) and [Redux thunk](https://github.com/reduxjs/redux-thunk) for state management
