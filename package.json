@@ -1,6 +1,6 @@
 {
-  "name": "quotes",
-  "version": "0.0.1",
+  "name": "minimal-quotes",
+  "version": "1.0.2",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
