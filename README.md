@@ -1,10 +1,10 @@
 # Minimal Quotes
 
+The application concept and the design is created by Kishore from Elitepixels as a part of [Project365](https://project365.design/2018/05/07/day-127-minimal-quotes-app-concept/)
+
 Minimal quotes is React Native application for both Android and iOS that throws you random quotes in a super clean minimal version. You can save this quotes to favorites or share them with your friends.
 
 ![Big Beautiful Picture](https://i.imgur.com/aQRCj7c.png)
-
-The app is designed as a part of [Project365](https://project365.design/2018/05/07/day-127-minimal-quotes-app-concept/)
 
 <a target="_blank" href='https://play.google.com/store/apps/details?id=io.insider.apps.quotes'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
 <a target="_blank" href='https://itunes.apple.com/us/app/minimal-quotes/id1428585029'><img width="200" alt='Download on App Store' src='https://i.imgur.com/7IxtMV0.png'/></a>
